@@ -5,8 +5,9 @@ import com.example.kotlinexample.BaseViewModel
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.processors.PublishProcessor
+import javax.inject.Inject
 
-class SearchViewModel(
+class SearchViewModel @Inject constructor(
     schedulerProvider: BaseSchedulerProvider,
     private val searchRepository: SearchRepository
 ) : BaseViewModel(schedulerProvider) {

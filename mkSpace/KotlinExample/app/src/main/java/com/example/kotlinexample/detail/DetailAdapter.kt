@@ -23,26 +23,6 @@ class DetailAdapter(
     private val onClickUrl: (String) -> Unit
 ) : ListAdapter<DetailAdapterItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    companion object {
-
-        private const val VIEW_TYPE_PROFILE = R.layout.item_detail_profile
-        private const val VIEW_TYPE_INFORMATION = R.layout.item_detail_information
-        private const val VIEW_TYPE_USERS = R.layout.item_detail_users
-
-        private val DIFF_CALLBACK =
-            AsyncDifferConfig.Builder(object : DiffUtil.ItemCallback<DetailAdapterItem>() {
-                override fun areItemsTheSame(
-                    oldItem: DetailAdapterItem,
-                    newItem: DetailAdapterItem
-                ): Boolean = oldItem.id == newItem.id
-
-                override fun areContentsTheSame(
-                    oldItem: DetailAdapterItem,
-                    newItem: DetailAdapterItem
-                ): Boolean = oldItem == newItem
-            }).build()
-    }
-
     init {
         setHasStableIds(true)
     }
@@ -131,5 +111,25 @@ class DetailAdapter(
         init {
             users.adapter = adapter
         }
+    }
+
+    companion object {
+
+        private const val VIEW_TYPE_PROFILE = R.layout.item_detail_profile
+        private const val VIEW_TYPE_INFORMATION = R.layout.item_detail_information
+        private const val VIEW_TYPE_USERS = R.layout.item_detail_users
+
+        private val DIFF_CALLBACK =
+            AsyncDifferConfig.Builder(object : DiffUtil.ItemCallback<DetailAdapterItem>() {
+                override fun areItemsTheSame(
+                    oldItem: DetailAdapterItem,
+                    newItem: DetailAdapterItem
+                ): Boolean = oldItem.id == newItem.id
+
+                override fun areContentsTheSame(
+                    oldItem: DetailAdapterItem,
+                    newItem: DetailAdapterItem
+                ): Boolean = oldItem == newItem
+            }).build()
     }
 }

@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinexample.BaseFragment
-import com.example.kotlinexample.Injection
 import com.example.kotlinexample.R
 import com.example.kotlinexample.rx.observeOnMain
 import com.example.kotlinexample.rx.subscribeWithErrorLogger
@@ -18,13 +17,16 @@ class MainFragment : BaseFragment() {
 
     private lateinit var adapter: MainAdapter
 
-    private val mainViewModel by activityViewModels<MainViewModel> {
-        Injection.provideMainViewModelFactory(requireContext())
-    }
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         adapter = MainAdapter()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
     override fun onCreateView(

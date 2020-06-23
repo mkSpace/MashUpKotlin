@@ -1,14 +1,19 @@
 package com.example.kotlinexample
 
 import androidx.annotation.CallSuper
-import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlinexample.di.DaggerViewModelFactory
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
+import javax.inject.Inject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity() {
 
     private val disposables by lazy { CompositeDisposable() }
+
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
 
     @CallSuper
     override fun onDestroy() {

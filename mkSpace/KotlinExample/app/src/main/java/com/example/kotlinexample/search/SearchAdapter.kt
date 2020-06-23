@@ -17,17 +17,6 @@ class SearchAdapter(
     private val onClickRepository: (Repository) -> Unit
 ) : ListAdapter<Repository, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    companion object {
-        private val DIFF_CALLBACK =
-            AsyncDifferConfig.Builder(object : DiffUtil.ItemCallback<Repository>() {
-                override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean =
-                    oldItem.id == newItem.id
-
-                override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean =
-                    oldItem == newItem
-            }).build()
-    }
-
     init {
         setHasStableIds(true)
     }
@@ -57,5 +46,16 @@ class SearchAdapter(
         val avatar: ImageView = itemView.repositoryAvatar
         val name: TextView = itemView.repositoryName
         val language: TextView = itemView.repositoryLanguage
+    }
+
+    companion object {
+        private val DIFF_CALLBACK =
+            AsyncDifferConfig.Builder(object : DiffUtil.ItemCallback<Repository>() {
+                override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean =
+                    oldItem.id == newItem.id
+
+                override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean =
+                    oldItem == newItem
+            }).build()
     }
 }

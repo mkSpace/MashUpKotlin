@@ -8,19 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinexample.BaseFragment
 import com.example.kotlinexample.Constants
-import com.example.kotlinexample.Injection
 import com.example.kotlinexample.R
+import com.example.kotlinexample.di.ViewModelKey
 import com.example.kotlinexample.rx.observeOnMain
 import com.example.kotlinexample.rx.subscribeWithErrorLogger
 import kotlinx.android.synthetic.main.fragment_detail.*
+import javax.inject.Inject
 
 class DetailFragment : BaseFragment() {
 
-    private val detailViewModel by viewModels<DetailViewModel> {
-        Injection.provideDetailViewModelFactory(requireContext(), repositoryId, userName)
-    }
+    private lateinit var detailViewModel: DetailViewModel
 
     private val repositoryId by lazy { arguments?.getString(Constants.REPOSITORY_ID) ?: "" }
     private val userName by lazy { arguments?.getString(Constants.USER_NAME) ?: "" }
@@ -30,6 +31,12 @@ class DetailFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         adapter = DetailAdapter(::handleUrlClick)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        detailViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -53,7 +60,7 @@ class DetailFragment : BaseFragment() {
 
         detailViewModel.items
             .observeOnMain()
-            .subscribeWithErrorLogger (adapter::submitList)
+            .subscribeWithErrorLogger(adapter::submitList)
             .addToDisposables()
     }
 

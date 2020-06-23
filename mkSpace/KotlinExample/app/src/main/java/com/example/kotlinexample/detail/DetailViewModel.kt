@@ -1,8 +1,8 @@
 package com.example.kotlinexample.detail
 
-import android.util.Log
 import com.example.kotlinexample.BaseSchedulerProvider
 import com.example.kotlinexample.BaseViewModel
+import com.example.kotlinexample.di.UseCase
 import com.example.kotlinexample.rx.subscribeWithErrorLogger
 import com.example.kotlinexample.search.Repository
 import com.example.kotlinexample.search.SearchRepository
@@ -10,11 +10,12 @@ import com.example.kotlinexample.user.UserRepository
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.rxkotlin.combineLatest
+import javax.inject.Inject
 
-class DetailViewModel(
+class DetailViewModel @Inject constructor(
     schedulerProvider: BaseSchedulerProvider,
-    repositoryId: String,
-    userName: String,
+    @UseCase("repositoryId") repositoryId: String,
+    @UseCase("userName") userName: String,
     searchRepository: SearchRepository,
     userRepository: UserRepository
 ) : BaseViewModel(schedulerProvider) {

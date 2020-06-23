@@ -1,10 +1,10 @@
 package com.example.kotlinexample.search
 
+import com.example.kotlinexample.SchedulerProvider
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.processors.BehaviorProcessor
-import java.text.SimpleDateFormat
 import java.util.*
 
 class SearchRepository(
@@ -25,6 +25,7 @@ class SearchRepository(
         queryProcessor
             .switchMapSingle {
                 remote.searchRepositories(it)
+                    .subscribeOn(SchedulerProvider.io())
                     .doOnSuccess { initialLoadProcessor.offer(false) }
             }
             .map { it.items ?: emptyList() }

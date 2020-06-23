@@ -6,8 +6,9 @@ import com.example.kotlinexample.BaseViewModel
 import com.example.kotlinexample.search.SearchRepository
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel @Inject constructor(
     schedulerProvider: BaseSchedulerProvider,
     searchRepository: SearchRepository
 ) : BaseViewModel(schedulerProvider) {

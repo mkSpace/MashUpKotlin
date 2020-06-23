@@ -1,0 +1,15 @@
+android {
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.github.com/\""
+            buildConfigField "String", "DB_NAME","\"sample.db\""
+        }
+        qa {
+            buildConfigField "String", "BASE_URL", "\"\""
+        }
+
+        release {
+            buildConfigField "String", "BASE_URL", "\"\""
+        }
+    }
+}
