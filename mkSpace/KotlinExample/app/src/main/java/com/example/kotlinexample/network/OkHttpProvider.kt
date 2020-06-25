@@ -4,7 +4,9 @@ import com.example.kotlinexample.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
+@Singleton
 object OkHttpProvider {
 
     private const val TIMEOUT_CONNECT = 10L

@@ -1,6 +1,6 @@
 package com.example.kotlinexample.detail
 
-import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import com.example.kotlinexample.BaseSchedulerProvider
 import com.example.kotlinexample.BaseViewModel
 import com.example.kotlinexample.rx.subscribeWithErrorLogger
@@ -11,7 +11,7 @@ import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.rxkotlin.combineLatest
 
-class DetailViewModel(
+class DetailViewModel @ViewModelInject constructor(
     schedulerProvider: BaseSchedulerProvider,
     repositoryId: String,
     userName: String,

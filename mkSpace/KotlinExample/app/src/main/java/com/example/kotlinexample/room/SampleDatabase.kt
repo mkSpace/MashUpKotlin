@@ -45,5 +45,5 @@ abstract class SampleDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun searchDao(): RepositoryDao
+    abstract fun getRepositoryDao(): RepositoryDao
 }

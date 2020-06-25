@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlinexample.R
 import com.example.kotlinexample.extensions.inflate
+import dagger.hilt.android.EntryPointAccessors
 import kotlinx.android.synthetic.main.item_detail_information.view.*
 import kotlinx.android.synthetic.main.item_detail_profile.view.*
 import kotlinx.android.synthetic.main.item_detail_users.view.*
+import javax.inject.Inject
 
 class DetailAdapter(
     private val onClickUrl: (String) -> Unit

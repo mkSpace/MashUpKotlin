@@ -14,8 +14,10 @@ import com.example.kotlinexample.extensions.inflate
 import com.example.kotlinexample.search.Repository
 import kotlinx.android.synthetic.main.item_main_repository.view.*
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
-class MainAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class MainAdapter @Inject constructor() :
+    ListAdapter<Repository, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private const val PAYLOAD_ADDED_TIME_CHANGED = "payload_added_time_changed"

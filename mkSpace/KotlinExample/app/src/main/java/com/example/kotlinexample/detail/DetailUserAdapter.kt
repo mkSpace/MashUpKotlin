@@ -56,5 +56,4 @@ class DetailUserAdapter: ListAdapter<Repository.Owner, RecyclerView.ViewHolder>(
         val avatar: ImageView = itemView.userAvatar
         val userName: TextView = itemView.userName
     }
-
 }
